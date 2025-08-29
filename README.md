@@ -227,6 +227,16 @@ For async requests, see the [AIOHttp SSL documentation](https://docs.aiohttp.org
 
 For sync requests, see the [urllib SSL documentation](https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen).
 
+##### Certificate Verification Issues
+
+The SDK will automatically use [certifi](https://pypi.org/project/certifi/)'s certificate bundle for SSL connections when available. This provides a curated set of Root Certificates for validating SSL connections, which helps prevent certificate verification errors when the required root certificates for Slack's APIs are not available in your system's certificate store.
+
+The SDK will use certifi when:
+
+- No custom SSL context is provided
+- No SSL-related environment variables are set (`SSL_CERT_FILE`, `SSL_CERT_DIR`, etc.)
+- certifi is installed
+
 #### Proxy
 
 A proxy is supported when making async requests, pass the `proxy` option, supported by both the RTM and the Web client.
